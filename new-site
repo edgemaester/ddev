@@ -1,12 +1,11 @@
 #!/bin/bash
 
-# Prompt for the site name
-echo "Enter the site name:"
-read site_name
+# First argument is for site name
+site_name=$1
 
 # Create the directory and move into it
-mkdir "$site_name"
-cd "$site_name"
+mkdir $site_name
+cd $site_name
 
 # Start the containers and set them up
 echo '<----------- Configure DDEV Project for Drupal ----------------->'
