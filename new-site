@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Start the containers and set them up
+echo '<----------- Configure DDEV Project for Drupal ----------------->'
+ddev config --project-type drupal10 --create-docroot --docroot web
+
+# Start the containers and set them up
+echo '<----------- Starting containers ------------------------------->'
+ddev start
+
+# Install Drupal with Composer
+echo '<----------- Install Drupal with Composer ---------------------->'
+ddev composer create drupal/recommended-project -y
+
+# Install Drupal (with Drush)
+echo '<----------- Install Drupal (with Drush) ----------------------->'
+ddev composer require --dev drush/drush
+ddev drush site:install --account-name=admin --account-pass=admin -y
+
+# Install Custom Code Development package
+echo '<----------- Install CORE-DEV ---------------------------------->'
+ddev composer require --dev drupal/core-dev
+
+* Launch
+echo '<----------- Local dev set up DONE - LAUNCH -------------------->'
+ddev launch
